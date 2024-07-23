@@ -5,12 +5,12 @@ import "./movie-card.scss"
 
 export const MovieCard = ({ movie, onMovieClick }) => {
     return (
-        <Card className="h-100" onClick={() => onMovieClick}>
-            <Card.Img variant="top" src={useBootstrapBreakpoints.image} />
+        <Card className="h-100" onClick={() => onMovieClick(movie)}>
+            <Card.Img variant="top" src={movie.image} />
             <Card.Body>
                 <Card.Title>{movie.title}</Card.Title>
                 <Card.Text>{movie.director}</Card.Text>
-                <Button onClick={() => onMovieClick(book)} variant="link">Open</Button>
+                <Button onClick={() => onMovieClick(movie)} variant="link">Open</Button>
             </Card.Body>
         </Card>
     );

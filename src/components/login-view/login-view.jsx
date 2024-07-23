@@ -12,8 +12,8 @@ export const LoginView = ({ onLoggedIn }) => {
     event.preventDefault();
 
     const data = {
-      access: username,
-      secret: password
+      Username: username,
+      Password: password
     };
 
     fetch("https://my-flix-caleb-7e8e5b64a2c6.herokuapp.com/login",  {
@@ -27,7 +27,7 @@ export const LoginView = ({ onLoggedIn }) => {
       console.log("Login response: ", data);
       if (data.user) {
         localStorage.setItem("user", JSON.stringify(data.user));
-        localStorage.setItem("token", data,token);
+        localStorage.setItem("token", data.token);
         onLoggedIn(data.user, data.token);
       } else {
         alert("No such user");

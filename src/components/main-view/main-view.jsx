@@ -9,8 +9,8 @@ import Col from 'react-bootstrap/Col';
 export const MainView = () => {  
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const storedToken = localStorage.getItem("token");  
-    const [user, setUser] = useState(null);
-    const [token, setToken] = useState(null);
+    const [user, setUser] = useState(storedUser? storedUser : null);
+    const [token, setToken] = useState(storedToken? storedToken : null);
     const [movies, setMovies] = useState([]);
     const [selectedMovie, setSelectedMovie] = useState(null);
     
@@ -24,8 +24,19 @@ export const MainView = () => {
             headers: { Authorization: `Bearer ${token}` }
         })
         .then((response) => response.json())
-        .then((movies) => {
-            setMovies(movies);
+        .then((data) => {
+            const movieFromApi = data.map((doc) => {
+                return {
+                    id: doc._id,
+                    image: doc.ImagePath,
+                    title: doc.Title, 
+                    genre: doc.Genre.Name,
+                    description: doc.Description,
+                    director: doc.Director.Name                                                           
+                };
+            });
+
+            setMovies(movieFromApi);
         });  
 
     }, [token]);
@@ -45,12 +56,12 @@ export const MainView = () => {
             ) : selectedMovie ? (                
                 <Col md={8}>
                     <button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button>
-                    <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />;
+                    <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
                 </Col>
             ) : movies.length === 0 ? (
                 <>
                     <button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button>
-                    <div>The list is empty!</div>;
+                    <div>The list is empty!</div>
                 </ >
             ) : (            
                 <>
