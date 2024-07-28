@@ -4,6 +4,7 @@ import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
+import { ProfileView } from "../profile-view/profile-view";
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -77,6 +78,21 @@ export const MainView = () => {
                                                 setToken(token);
                                         }}/>
                                     </Col> 
+                                )}
+                            </>
+                        }
+                    />
+                    <Route
+                        path="/users/:username"
+                        element={
+                            <>
+                                {!user ? (
+                                    <Navigate to="/login" replace />
+                                ):(
+                                    <Col md={6}>
+                                        <h2>Account Information</h2>
+                                        <ProfileView />
+                                    </Col>
                                 )}
                             </>
                         }
