@@ -51,7 +51,7 @@ export const MainView = () => {
             <Row className="justify-content-md-center">
                 <Routes>
                     <Route
-                        path= "/users"
+                        path= "/signup"
                         element={
                             <>
                                 {user ? (
@@ -83,14 +83,13 @@ export const MainView = () => {
                         }
                     />
                     <Route
-                        path="/users/:username"
+                        path="/profile"
                         element={
                             <>
                                 {!user ? (
                                     <Navigate to="/login" replace />
                                 ):(
-                                    <Col md={6}>
-                                        <h2>Account Information</h2>
+                                    <Col>                                        
                                         <ProfileView />
                                     </Col>
                                 )}
@@ -124,7 +123,7 @@ export const MainView = () => {
                                 ):(
                                     <>
                                         {movies.map((movie) => (
-                                            <Col className="mb-5" key={movie.id} md={3}>
+                                            <Col className="mb-5" key={movie.id} xs={12} md={6} lg={3}>
                                                 <MovieCard movie={movie} />
                                             </Col>
                                         ))}    

@@ -10,6 +10,14 @@
   font-weight: bold;
 }
 
+.img {
+  width: 60%;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
 :root, [data-bs-theme="light"] {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
