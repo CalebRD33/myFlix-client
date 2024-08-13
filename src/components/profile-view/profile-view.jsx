@@ -73,7 +73,7 @@ export const ProfileView = () => {
           </Card>
         </Col> 
       </Row>
-      <FavoriteMovies favMovies={favMovies} />                
+      <FavoriteMovies favMovies={favMovies} />                     
     </Container>
   );
   
