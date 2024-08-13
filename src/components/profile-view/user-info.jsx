@@ -1,9 +1,10 @@
-export const UserInfo = ({email, name}) => {
+export const UserInfo = ({email, name, birthday}) => {
     return (
         <>
-        <h4>Your Info</h4>
+        <h4>Your Info</h4><br/>
             <p>Name: {name}</p>
-            <p>e-mail: {email}</p>            
+            <p>Email: {email}</p>  
+            <p>Birthday: {birthday} </p>          
         </>
     )
 }
