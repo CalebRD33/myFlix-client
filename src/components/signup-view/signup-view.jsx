@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { Link } from "react-router-dom";
+
 
 export const SignupView = () => {
     const [username, setUsername] = useState("");
@@ -27,7 +29,7 @@ export const SignupView = () => {
         }).then((response) => {
             if (response.ok) {
                 alert("Sign-up successful");
-                window.location.reload();
+                window.location.href = "/login";
             } else {
                 alert("Sign-up failed");
             }
@@ -36,44 +38,50 @@ export const SignupView = () => {
 
     return (
         <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="signUpFormUsername">
-                <Form.Label>Username:</Form.Label>
+            <Form.Group controlId="signUpFormUsername" style={{ marginBottom: '15px' }}>
                 <Form.Control
                     type="text"
+                    placeholder="Username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
                     minLength="3"
                 />
             </Form.Group>
-            <Form.Group controlId="signUpFormPassword">
-                <Form.Label>Password:</Form.Label>
+            <Form.Group controlId="signUpFormPassword" style={{ marginBottom: '15px' }}>
                 <Form.Control
                     type="password"
+                    placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
             </Form.Group>
-            <Form.Group controlId="signUpFormEmail">
-                <Form.Label>Email:</Form.Label>
+            <Form.Group controlId="signUpFormEmail" style={{ marginBottom: '15px' }}>
                 <Form.Control
                     type="email"
+                    placeholder="Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
                 />
             </Form.Group>
-            <Form.Group controlId="signUpFormBirthday">
-                <Form.Label>Birthday:</Form.Label>
+            <Form.Group controlId="signUpFormBirthday" style={{ marginBottom: '15px' }}>
                 <Form.Control
-                    type="date"
+                    type="text"
+                    placeholder="Birthday"
                     value={birthday}
+                    onFocus={(e) => e.target.type = 'date'}
                     onChange={(e) => setBirthday(e.target.value)}
                     required
                 />
             </Form.Group>
-            <Button variant="primary" type="submit">Submit</Button>
+            <div style={{ textAlign: 'right'}}>
+            <Button variant="primary" type="submit" style={{ marginBottom: '15px' }}>Sign-up</Button>
+            <br/>
+            <Link to="/login">Already have an account?</Link>
+            </div>
         </Form>
+        
     );
 };
