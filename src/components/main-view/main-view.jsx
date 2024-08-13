@@ -9,6 +9,8 @@ import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
+import "./main-view.scss"
+
 export const MainView = () => {  
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const storedToken = localStorage.getItem("token");  
@@ -47,8 +49,8 @@ export const MainView = () => {
             <NavigationBar 
                 user={user}
                 onLoggedOut={() => { setUser(null); setToken(null); localStorage.clear(); }}
-            />
-            <Row className="justify-content-md-center">
+            />        
+            <Row className="justify-content-md-center" style={{marginTop: '100px'}}>
                 <Routes>
                     <Route
                         path= "/signup"
@@ -58,6 +60,10 @@ export const MainView = () => {
                                     <Navigate to="/" />
                                 ):(
                                     <Col md={5}>
+                                        <div style={{ textAlign: 'center', marginBottom: '50px', marginTop: '100px' }}>
+                                            <h6>Welcome to</h6>
+                                            <h1 className="passion-one-black">myFlix</h1>
+                                        </div>
                                         <SignupView />
                                     </Col>
                                 )}    
@@ -71,7 +77,11 @@ export const MainView = () => {
                                 {user ? (
                                     <Navigate to="/" />
                                 ):(
-                                    <Col md={5}>
+                                    <Col md={5}> 
+                                        <div style={{ textAlign: 'center', marginBottom: '50px', marginTop: '100px' }}>
+                                            <h6>Welcome to</h6>
+                                            <h1 className="passion-one-black">myFlix</h1>
+                                        </div>                                   
                                         <LoginView 
                                             onLoggedIn={(user, token) => {
                                                 setUser(user);
@@ -89,7 +99,7 @@ export const MainView = () => {
                                 {!user ? (
                                     <Navigate to="/login" replace />
                                 ):(
-                                    <Col>                                        
+                                    <Col>                                       
                                         <ProfileView />
                                     </Col>
                                 )}
@@ -105,7 +115,7 @@ export const MainView = () => {
                                 ): movies.length === 0 ? (
                                     <Col>The list is empty!</Col>
                                 ):(
-                                    <Col md={8}>
+                                    <Col>
                                         <MovieView movies={movies} />
                                     </Col>
                                 )}
@@ -122,6 +132,9 @@ export const MainView = () => {
                                     <Col>The list is empty!</Col>
                                 ):(
                                     <>
+                                        <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+                                            <h1 className="passion-one-black">myFlix</h1>
+                                        </div>
                                         {movies.map((movie) => (
                                             <Col className="mb-5" key={movie.id} xs={12} md={6} lg={3}>
                                                 <MovieCard movie={movie} />
