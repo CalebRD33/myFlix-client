@@ -7,6 +7,7 @@ import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { ProfileView } from "../profile-view/profile-view";
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import "./main-view.scss"
@@ -17,6 +18,7 @@ export const MainView = () => {
     const [user, setUser] = useState(storedUser? storedUser : null);
     const [token, setToken] = useState(storedToken? storedToken : null);
     const [movies, setMovies] = useState([]);
+    const [movieSearch, setMovieSearch] = useState("");
     
     useEffect(() => {
         if (!token) {
@@ -43,6 +45,10 @@ export const MainView = () => {
         });  
 
     }, [token]);
+
+    const onMovieSearch = movies.filter((movie) =>
+        movie.title.toLowerCase().includes(movieSearch.toLocaleLowerCase())
+    );
 
     return (
         <BrowserRouter>
@@ -128,14 +134,22 @@ export const MainView = () => {
                             <>
                                 {!user ? (
                                     <Navigate to="/login" replace />
-                                ): movies.length === 0 ? (
-                                    <Col>The list is empty!</Col>
                                 ):(
                                     <>
-                                        <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+                                        <Row className="justify-content-md-center">
+                                        <Col style={{ textAlign: 'center', marginBottom: '50px' }} md={6}>
                                             <h1 className="passion-one-black">myFlix</h1>
-                                        </div>
-                                        {movies.map((movie) => (
+                                            <Form>
+                                                <Form.Control
+                                                    type='search'
+                                                    value={movieSearch}
+                                                    placeholder="Search"
+                                                    onChange={(e) => setMovieSearch(e.target.value)}
+                                                />
+                                            </Form>
+                                        </Col>
+                                        </Row>
+                                        {onMovieSearch.map((movie) => (
                                             <Col className="mb-5" key={movie.id} xs={12} md={6} lg={3}>
                                                 <MovieCard movie={movie} />
                                             </Col>
